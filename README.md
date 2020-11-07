@@ -1,4 +1,4 @@
-1# docker-roms- Docker image to run the Regional Ocean Modeling System - ROMS
+# docker-roms- Docker image to run the Regional Ocean Modeling System - ROMS
 
 Creating a docker image, based on ubuntu 16.04, to run Regional Ocean Modeling System - ROMS, under any version of linux.
 
