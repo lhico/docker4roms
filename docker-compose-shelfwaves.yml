@@ -1,0 +1,10 @@
+version:"3"
+
+services:
+        roms:
+                image: nilodna/docker4roms:shelfwaves
+                container_name: roms
+                tty: true
+                volumes:
+                        - ../src_code:/home/lhico/rom_src
+                        - ../projects:/home/lhico/projects

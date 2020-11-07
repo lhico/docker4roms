@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  roms:
+    image: nilodna/docker4roms:latest
+    container_name: roms
+    tty: true
+    volumes:
+      - ../src_code:/home/lhico/roms_src
+      - ../projects:/home/lhico/projects

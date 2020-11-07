@@ -1,0 +1,24 @@
+FROM ubuntu:16.04
+MAINTAINER Danilo A. Silva <nilodna@gmail.com>
+
+# install dependencies for ROMS
+RUN apt-get update && apt-get -y install sudo wget build-essential gfortran && \
+    apt-get -y install subversion libnetcdf-dev libnetcdff-dev libhdf5-serial-dev  &&\
+    apt-get -y install libkernlib1-gfortran netcdf-bin hdf5-tools mpich nano
+
+# add user lhico with no password, add to sudo group
+RUN adduser --disabled-password --gecos '' lhico &&\
+    adduser lhico sudo                           &&\
+    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+RUN chown -R lhico:lhico /home/lhico
+
+USER lhico
+
+# set a working directory to open when run the container
+WORKDIR /home/lhico/
+
+# set netcdf4 directories
+ENV NF_CONFIG=/usr/bin/nf-config
+ENV NETCDF_INCDIR=/usr/include
+
