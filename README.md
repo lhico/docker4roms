@@ -35,3 +35,32 @@ docker run -v /path/to/a/shared/folder/projects:/home/lhico/projects -ti docker4
 ## Getting started - final user
 
 Close this repository or just download the ```docker-compose-*.yml``` of your preference, but please be aware of the limitations for each setup.
+
+### How to run?
+
+After download or clone this repository, access the place where the ```docker-compose-*.yml``` file is and type in your terminal:
+
+```
+docker-compose -f docker-compose-shelfwaves.yml up -d
+```
+or 
+
+```
+docker-compose -f docker-compose-personal.yml up -d
+```
+
+With this command, the docker-compose software will build the right docker4roms release to your case, create two shared folder between host and container, sharing the ROMS source code and your projects setup and put all this to run in background (```-d```). 
+
+To access the container, you can type:
+
+```
+docker exec -it roms bash
+```
+
+and you will access the working directory ```home/lhico``` with two folders: roms_src and projects.
+
+
+## Running my first test case - upwelling
+
+
+
