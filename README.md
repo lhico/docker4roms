@@ -62,5 +62,30 @@ and you will access the working directory ```home/lhico``` with two folders: rom
 
 ## Running my first test case - upwelling
 
+UNDER DEVELOPMENT
 
-
+```
+Rodando um test case
+  Compilar o modelo
+    Para o caso do upwelling (testcase mais conhecido), 3 arquivos são necessários. Estes já estão presentes no ROMS, mas fica cada um numa pasta
+    dentro da estrutura.
+    No diretório projects e cria uma pasta lá, pode ser upwelling mesmo
+        cd projects; mkdir upwelling
+        cp ../src_code/ROMS/External/roms_upwelling.in  .
+        cp ../roms_src/ROMS/External/varinfo.dat .
+        cp ../src_code/ROMS/Include/upwelling.h .
+        cp ../src_code/ROMS/bin/build_roms.bash .
+    faz esses passos aí dentro da pasta que vc criar pra simulação
+    aí precisa editar alguns arquivos pra ajustar os caminhos.
+    editar o build_roms.bash
+      linha 110: mudar para MY_ROOT_DIR=${HOME}/roms_src
+      linha 111: mudar para MY_PROJECT_DIR=${HOME}/projects/upwelling
+      linha 124: mudar para MY_ROMS_SRC=${MY_ROOT_DIR}
+      linha 173: mudar para FORT=gfortran
+      linha 177: comentar a linha # export         USE_LARGE=on  (checar se isso é necessário)
+      linha 178: descomentar a linha  export       USE_NETCDF4=on
+    editar o roms_upwelling.in
+      linha 76: mudar para VARNAME = varinfo.dat
+  Rodando o modelo
+    sudo ./romsS < roms_upwelling.in
+```
