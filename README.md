@@ -15,6 +15,10 @@ netCDF files generated.
 ## Pre-requisites
 
 - Install docker in your system. See [here](https://docs.docker.com/engine/installation/).
+- Right folder structures:
+	- your_folder/docker-roms
+	- your_folder/projects
+	- your_folder/src_code
 
 ## Getting started - development building setup
 
@@ -26,7 +30,7 @@ Clone this repository and then type in your command line:
 sudo docker build . -t docker4roms -f ${PWD}/Dockerfile.personal
 ```
 
-To access creating a directory connecting host/guest, use:
+To access the container with a shared folder between host/guest, use:
 
 ```
 docker run -v /path/to/a/shared/folder/projects:/home/lhico/projects -ti docker4roms
@@ -57,7 +61,7 @@ To access the container, you can type:
 docker exec -it roms bash
 ```
 
-and you will access the working directory ```home/lhico``` with two folders: roms_src and projects.
+and you will access the working directory ```/home/lhico``` with two folders: roms_src and projects.
 
 
 ## Running my first test case - upwelling
