@@ -16,9 +16,9 @@ netCDF files generated.
 
 - Install docker in your system. See [here](https://docs.docker.com/engine/installation/).
 - Right folder structures:
-	- your_folder/docker-roms
-	- your_folder/projects
-	- your_folder/src_code
+	- your_folder/docker-roms: this repository's folder
+	- your_folder/projects: folder with your projects to run
+	- your_folder/src_code: you must download the ROMS source code here
 
 ## Getting started - development building setup
 
