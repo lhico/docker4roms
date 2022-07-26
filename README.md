@@ -1,6 +1,6 @@
 # docker-roms- Docker image to run the Regional Ocean Modeling System - ROMS
 
-Creating a docker image, based on ubuntu 16.04, to run Regional Ocean Modeling System - ROMS, under any version of linux.
+Creating a docker image, based on ubuntu 20.04, to run Regional Ocean Modeling System - ROMS, under any version of linux.
 
 
 This docker image was based on the one found on [MetOcean's repository](https://github.com/metocean/docker-roms-public), with some simplification
