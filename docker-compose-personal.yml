@@ -5,8 +5,8 @@ services:
     #image: nilodna/docker4roms:latest
     build:
         context: .
-        dockerfile: ./Dockerfile20
-    container_name: roms_ubuntu2020
+        dockerfile: ./Dockerfile.personal
+    container_name: roms
     tty: true
     volumes:
       - ../src_code:/home/lhico/roms_src
