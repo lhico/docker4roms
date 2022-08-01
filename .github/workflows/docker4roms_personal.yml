@@ -13,16 +13,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: docker login
-        env:
-          DOCKER_USER: ${{secrets.DOCKER_USER}}
-          DOCKER_PASS: ${{secrets.DOCKER_PASS}}
-        run: echo $DOCKER_USER
+     #   env:
+     #     DOCKER_USER: ${{secrets.DOCKER_USER}}
+     #     DOCKER_PASS: ${{secrets.DOCKER_PASS}}
+        run: echo ${{secrets.DOCKER_USER}}
           # |
           #  echo $DOCKER_PASS >> ~/pass.txt
           #  cat ~/pass.txt | docker login --username $DOCKER_USER --password-stdin
       
-      - name: building docker image
-        run: docker build . --file ./Dockerfile.personal --tag nilodna/docker4roms:testCI
+     # - name: building docker image
+     #   run: docker build . --file ./Dockerfile.personal --tag nilodna/docker4roms:testCI
         
-      - name: docker push
-        run: docker push ${{secrets.DOCKER_USER}}/nilodna
+     # - name: docker push
+     #   run: docker push ${{secrets.DOCKER_USER}}/nilodna
