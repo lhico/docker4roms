@@ -30,4 +30,4 @@ jobs:
           context: .
           file: ./Dockerfile.personal
           push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/docker4roms:latest
+          tags: ${{ secrets.DOCKER_USER }}/docker4roms:latest
