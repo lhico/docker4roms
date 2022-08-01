@@ -24,4 +24,4 @@ jobs:
         run: docker build . --file ./Dockerfile.personal --tag nilodna/docker4roms:testCI
         
       - name: docker push
-        run: docker push ${{secrets.DOCKER_USER}}/nilodna
+        run: docker push nilodna/docker4roms
