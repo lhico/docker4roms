@@ -1,32 +1,25 @@
-# This is a basic workflow to help you get started with Actions
+name: Docker Image CI
 
-name: Docker4roms Personal Usage
-
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "first-action" branch
   push:
-    branches: [ "main" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main" ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+    branches: [ main ]
+    
 jobs:
-  # This workflow contains a single job called "build"
+
   build:
-    # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-
-      # TODO: change which snowflake database tag to use in backend/api/settings.py [homolog]
-
-      # Runs a single command using the runners shell
-      - name: Build Personal Image
-        run: docker build . -f ./Dockerfile.personal
+      - name: docker login
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          DOCKER_PASS: ${{secrets.DOCKER_PASS}}
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASS
+      
+      - name: building docker image
+        run: docker build . --file ./Dockerfile.personal --tag nilodna/docker4roms:testCI
+        
+      - name: docker push
+        run: docker push ${{secrets.DOCKER_USER}}/nilodna
