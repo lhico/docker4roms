@@ -16,9 +16,10 @@ jobs:
         env:
           DOCKER_USER: ${{secrets.DOCKER_USER}}
           DOCKER_PASS: ${{secrets.DOCKER_PASS}}
-        run: |
-            echo $DOCKER_PASS >> ~/pass.txt
-            cat ~/pass.txt | docker login --username $DOCKER_USER --password-stdin
+        run: echo $DOCKER_USER
+          # |
+          #  echo $DOCKER_PASS >> ~/pass.txt
+          #  cat ~/pass.txt | docker login --username $DOCKER_USER --password-stdin
       
       - name: building docker image
         run: docker build . --file ./Dockerfile.personal --tag nilodna/docker4roms:testCI
