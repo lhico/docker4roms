@@ -31,4 +31,4 @@ jobs:
       - name: Build Personal Image
         run: | 
           docker build . -f ./Dockerfile.personal
-          docker-compose -f docker-compose-personal.yml up -d
+          docker-compose -f ./docker-compose-personal.yml up -d
