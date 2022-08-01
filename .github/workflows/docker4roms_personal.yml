@@ -21,7 +21,9 @@ jobs:
             cat ~/pass.txt | docker login --username nilodna --password-stdin
       
       - name: building docker image
-        run: docker build . --file ./Dockerfile.personal --tag nilodna/docker4roms:testCI
+        run: | 
+            docker build . --file ./Dockerfile.personal --tag nilodna/docker4roms:testCI
+            docker ps -a
         
       - name: docker push
         run: docker push nilodna/docker4roms
