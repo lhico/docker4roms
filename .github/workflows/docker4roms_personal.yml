@@ -18,7 +18,7 @@ jobs:
           DOCKER_PASS: ${{secrets.DOCKER_PASS}}
         run: |
             echo $DOCKER_PASS >> ~/pass.txt
-            cat ~/pass.txt | docker login --username $DOCKER_USER --password-stdin
+            cat ~/pass.txt | docker login --username nilodna --password-stdin
       
       - name: building docker image
         run: docker build . --file ./Dockerfile.personal --tag nilodna/docker4roms:testCI
