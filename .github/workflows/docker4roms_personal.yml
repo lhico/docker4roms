@@ -24,15 +24,9 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
-      - uses: isbang/compose-action@v1.1.0
-      
-        with:
-          compose-file: "docker-compose-personal.yml"
 
       # TODO: change which snowflake database tag to use in backend/api/settings.py [homolog]
 
       # Runs a single command using the runners shell
       - name: Build Personal Image
-        run: | 
-          docker build . -f ./Dockerfile.personal
-          docker-compose up -d
+        run: docker-compose -f docker-compose-personal.yml up -d
