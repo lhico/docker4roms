@@ -16,7 +16,7 @@ jobs:
      #   env:
      #     DOCKER_USER: ${{secrets.DOCKER_USER}}
      #     DOCKER_PASS: ${{secrets.DOCKER_PASS}}
-        run: echo ${{secrets.DOCKER_USER}}
+        run: echo '${{secrets.DOCKER_USER}}'
           # |
           #  echo $DOCKER_PASS >> ~/pass.txt
           #  cat ~/pass.txt | docker login --username $DOCKER_USER --password-stdin
