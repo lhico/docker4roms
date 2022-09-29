@@ -44,10 +44,11 @@ Close this repository or just download the ```docker-compose-*.yml``` of your pr
 
 After download or clone this repository, access the place where the ```docker-compose-*.yml``` file is and type in your terminal:
 
+Notice that the following option allows multiple containers from a single image. You can replace `roms_user`, but you should also alter it in `docker-compose-shelfwaves.yml` in the `container_name` field.
 ```
-docker-compose -f docker-compose-shelfwaves.yml up -d
+docker-compose -f docker-compose-shelfwaves.yml -p roms_user up -d
 ```
-or 
+If you are not using a shared machine, you can simply run:
 
 ```
 docker-compose -f docker-compose-personal.yml up -d
@@ -56,6 +57,15 @@ docker-compose -f docker-compose-personal.yml up -d
 With this command, the docker-compose software will build the right docker4roms release to your case, create two shared folder between host and container, sharing the ROMS source code and your projects setup and put all this to run in background (```-d```). 
 
 To access the container, you can type:
+
+If shelfwaves option is selected:
+
+Again `roms_user` must be the same as in the docker-compose command.
+```
+docker exec -it roms_user bash
+```
+
+if you are using a personal machine:
 
 ```
 docker exec -it roms bash

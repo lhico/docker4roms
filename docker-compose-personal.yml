@@ -1,11 +1,11 @@
-version: "4.0"
+version: "3"
 
 services:
   roms:
-    #image: nilodna/docker4roms:latest
-    build:
-        context: .
-        dockerfile: ./Dockerfile.personal
+    image: nilodna/docker4roms:latest
+    # build:
+    #     context: .
+    #     dockerfile: ./Dockerfile.personal
     container_name: roms
     tty: true
     volumes:
