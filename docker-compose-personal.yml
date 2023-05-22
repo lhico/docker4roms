@@ -1,15 +1,12 @@
-version: '3.0'
+version: "3"
 
 services:
   roms:
-    image: oteldks/docker4roms:latest
+    image: nilodna/docker4roms:latest
     # build:
-        # context: .
-        # dockerfile: ./Dockerfile.personal
-        # args:
-          # PASSWORD: svn_roms_password
-          # USERNAME: username_roms
-    container_name: roms_user
+    #     context: .
+    #     dockerfile: ./Dockerfile.personal
+    container_name: roms
     tty: true
     volumes:
       - ../src_code:/home/lhico/roms_src

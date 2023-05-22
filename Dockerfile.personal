@@ -1,7 +1,5 @@
 FROM ubuntu:20.04
 MAINTAINER Danilo A. Silva <nilodna@gmail.com>
-MAINTAINER Dalton Kei Sasaki<dalton.sasaki@gmail.com>
-
 
 # install dependencies for ROMS
 RUN apt-get update
@@ -15,37 +13,15 @@ RUN apt-get install -y sudo wget build-essential gfortran-7 && \
 RUN adduser --disabled-password --gecos '' lhico &&\
     adduser lhico sudo                           &&\
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
 RUN chown -R lhico:lhico /home/lhico
 
 USER lhico
 
-# # set a working directory to open when run the container
+# set a working directory to open when run the container
 WORKDIR /home/lhico/
-
-ARG PASSWORD
-ARG USERNAME
-
-# checkout ARPACK from svn
-RUN svn checkout --username=${USERNAME} --password=${PASSWORD} --non-interactive --trust-server-cert  https://www.myroms.org/svn/src/libs/ARPACK
-# WORKDIR /home/aux/ARPACK
-
-WORKDIR /home/lhico/ARPACK
-
-# replacing lines in ARmake.inc
-RUN sed -i 's/^FC\s*=.*/FC = gfortran/' ARmake.inc
-RUN sed -i 's/^FFLAGS\s*=.*/FFLAGS = -O3/' ARmake.inc
-RUN sed -i 's/^PFFLAGS\s*=.*/PFFLAGS = -O3/' ARmake.inc
-RUN sed -i 's|home         = $(ROMSHOME)/Lib/ARPACK|home         = /home/lhico/ARPACK|' ARmake.inc
-
-RUN make all
-
-# moving libraries to appropriate directories
-RUN sudo mv libarpack.a /usr/lib/x86_64-linux-gnu/
-RUN sudo mv libparpack.a /usr/lib/x86_64-linux-gnu/
-
 
 # set netcdf4 directories
 ENV NF_CONFIG=/usr/bin/nf-config
 ENV NETCDF_INCDIR=/usr/include
 
-WORKDIR /home/lhico/
