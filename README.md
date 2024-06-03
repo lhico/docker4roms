@@ -38,68 +38,56 @@ docker run -v /path/to/a/shared/folder/projects:/home/lhico/projects -ti docker4
 
 ## Getting started - final user
 
-Close this repository or just download the ```docker-compose-*.yml``` of your preference, but please be aware of the limitations for each setup.
+Clone this repository or just download the ```docker-compose-personal.yml```, but please be aware of the limitations for each setup.
 
 ### How to run?
 
-After download or clone this repository, access the place where the ```docker-compose-*.yml``` file is and type in your terminal:
+After download or clone this repository, access the place where the ```docker-compose-personal.yml``` file is and type in your terminal:
 
-Notice that the following option allows multiple containers from a single image. You can replace `roms_user`, but you should also alter it in `docker-compose-shelfwaves.yml` in the `container_name` field.
-```
-docker-compose -f docker-compose-shelfwaves.yml -p roms_user up -d
-```
-If you are not using a shared machine, you can simply run:
+Notice that the following option allows multiple containers from a single image. You can replace `roms_user`, but you should also alter it in `docker-compose-personal.yml` in the `container_name` field.
 
 ```
-docker-compose -f docker-compose-personal.yml up -d
+docker-compose -f docker-compose-personal.yml -p roms_user up -d
 ```
 
 With this command, the docker-compose software will build the right docker4roms release to your case, create two shared folder between host and container, sharing the ROMS source code and your projects setup and put all this to run in background (```-d```). 
 
-To access the container, you can type:
+Note that the container building process will create two new folders on ```../``` of your structure. These two folders are fundamental to the Docker4ROMS usability, holding the source code of ROMS and your projects (numerical experiments). Make sure to copy the ```build_roms.sh``` file to the projects before accessing the container.
 
-If shelfwaves option is selected:
+To access the container, you can type:
 
 Again `roms_user` must be the same as in the docker-compose command.
 ```
 docker exec -it roms_user bash
 ```
 
-if you are using a personal machine:
-
-```
-docker exec -it roms bash
-```
-
 and you will access the working directory ```/home/lhico``` with two folders: roms_src and projects.
-
 
 ## Running my first test case - upwelling
 
-UNDER DEVELOPMENT
+This repository contains a ```build_roms.sh``` pre configure to be used inside the docker4roms structure. You must copy this file inside your ```projects``` folder and run the following steps for the UPWELLING test case:
 
 ```
-Rodando um test case
-  Compilar o modelo
-    Para o caso do upwelling (testcase mais conhecido), 3 arquivos são necessários. Estes já estão presentes no ROMS, mas fica cada um numa pasta
-    dentro da estrutura.
-    No diretório projects e cria uma pasta lá, pode ser upwelling mesmo
-        cd projects; mkdir upwelling
-        cp ../src_code/ROMS/External/roms_upwelling.in  .
-        cp ../roms_src/ROMS/External/varinfo.dat .
-        cp ../src_code/ROMS/Include/upwelling.h .
-        cp ../src_code/ROMS/bin/build_roms.bash .
-    faz esses passos aí dentro da pasta que vc criar pra simulação
-    aí precisa editar alguns arquivos pra ajustar os caminhos.
-    editar o build_roms.bash
-      linha 110: mudar para MY_ROOT_DIR=${HOME}/roms_src
-      linha 111: mudar para MY_PROJECT_DIR=${HOME}/projects/upwelling
-      linha 124: mudar para MY_ROMS_SRC=${MY_ROOT_DIR}
-      linha 173: mudar para FORT=gfortran
-      linha 177: comentar a linha # export         USE_LARGE=on  (checar se isso é necessário)
-      linha 178: descomentar a linha  export       USE_NETCDF4=on
-    editar o roms_upwelling.in
-      linha 76: mudar para VARNAME = varinfo.dat
-  Rodando o modelo
-    sudo ./romsS < roms_upwelling.in
+# access your container:
+docker exec -it roms_user bash
+
+# Once inside the container, go to projects folder and create a new folder
+# note that the build_roms.sh must be in the projects folder.
+cd projects; mkdir upwelling
+
+# Now you need to copy the upwelling configuration files, that came with the ROMS source code
+cd upwelling
+cp ../build_roms.sh .
+cp ../../roms_src/ROMS/External/roms_upwelling.in  .
+cp ../../roms_src/ROMS/External/varinfo.dat .
+cp ../../roms_src/ROMS/Include/upwelling.h .
+
+# compile the model:
+sudo bash build_roms.sh
+
+# change VARNAME = varinfo.dat in the roms_upwelling.in
+nano roms_upwelling.in
+
+# now just run the model:
+sudo ./romsS < roms_upwelling.in
 ```
