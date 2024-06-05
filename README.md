@@ -68,7 +68,19 @@ and you will access the working directory ```/home/lhico``` with two folders: ro
 This repository contains a ```build_roms.sh``` pre configure to be used inside the docker4roms structure. You must copy this file inside your ```projects``` folder and run the following steps for the UPWELLING test case:
 
 ```
-# access your container:
+# outside the container, first follow this sequence of codes:
+cd ../projects 
+mkdir upwelling 	# create new folder for our test
+chmod 777 upwelling # give full writing and reading privileges
+cd upwelling		
+
+# copy files for the UPWELLING test case
+cp ../../docker-roms/build_roms.sh .
+cp ../../src_code/ROMS/External/roms_upwelling.in .
+cp ../../src_code/ROMS/External/varinfo.yaml .
+cp ../../src_code/ROMS/Include/upwelling.h .
+
+# Now, access your container:
 docker exec -it roms_user bash
 
 # Once inside the container, go to projects folder and create a new folder
