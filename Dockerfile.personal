@@ -1,5 +1,5 @@
 FROM ubuntu:20.04
-MAINTAINER Danilo A. Silva <nilodna@gmail.com>
+MAINTAINER Danilo A. Silva <nilodna@gmail.com> and Dalton K. Sasaki <dalton.sasaki@gmail.com>
 
 # install dependencies for ROMS
 RUN apt-get update
